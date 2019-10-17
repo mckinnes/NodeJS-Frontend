@@ -6,7 +6,7 @@ const express = require('express');
 const router = express.Router();
 
 // Routes from other files Bringing in routes from 'apps'.
-// router.use('/', require('../../apps/_/apps').router);
+router.use('/', require('../../apps/_/apps').router);
 
 router.get('/', (req, res) => {
   // const { alert } = req.session;
