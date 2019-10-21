@@ -6,17 +6,13 @@ const router = express.Router();
 let getDashboard;
 
 // declare routes
-router.get('/dashboard', (req, res) => getDashboard(res, res));
+router.get('/dashboard', (req, res) => getDashboard(req, res));
 
 getDashboard = async (req, res) => {
-  // const { alert } = req.session;
-  // req.session.alert = null;
-  const alert = {
-    type: 'success',
-    highlighted: 'Successfully Did Something!',
-    text: 'This is an example of a flash alert.',
-    duration: 5000
-  };
+  console.log(req.session);
+  const { alert, user } = req.session;
+  console.log(user)
+  req.session.alert = null;
   res.render(
     'user/pages/dashboard',
     {
@@ -24,7 +20,8 @@ getDashboard = async (req, res) => {
       alert,
       //navBar,
       //footer,
-      activePage: 'index'
+      activePage: 'index',
+      user
     }
   );
 };

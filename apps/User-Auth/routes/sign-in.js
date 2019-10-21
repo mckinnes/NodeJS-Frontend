@@ -4,14 +4,8 @@ const superagent = require('superagent');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  // const { alert } = req.session;
-  // req.session.alert = null;
-  const alert = {
-    type: 'success',
-    highlighted: 'Successfully Did Something!',
-    text: 'This is an example of a flash alert.',
-    duration: 5000
-  };
+  const { alert } = req.session;
+  req.session.alert = null;
   res.render(
     'user-auth/pages/sign-in',
     {
@@ -34,10 +28,25 @@ router.post('/sign-in', async (req, res) => {
       key: process.env.API_KEY,
       username,
       password,
-      values: 'email id'
+      values: 'email id firstName lastName'
     });
+    
+  const userValues = result.body.values;
+  req.session.user = {
+    id: userValues.id,
+    email: userValues.email,
+    firstName: userValues.firstName,
+    lastName: userValues.lastName,
+  };
 
-  console.log(result.body);
+  req.session.alert = {
+    type: 'success',
+    highlighted: 'Successfully Did Something!',
+    text: `Last Logged In: ${userValues.lastLogged}`,
+    duration: 5000
+  };
+
+  res.redirect('/user/dashboard');
 });
 
 module.exports.routes = router;
