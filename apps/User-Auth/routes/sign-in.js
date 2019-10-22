@@ -37,6 +37,7 @@ router.post('/sign-in', async (req, res) => {
     email: userValues.email,
     firstName: userValues.firstName,
     lastName: userValues.lastName,
+    lastLogged: userValues.lastLogged
   };
 
   req.session.alert = {

@@ -46,7 +46,7 @@
             </div>
           </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
+        <form class="form-inline my-2 my-lg-0" action="/user/sign-out" method="POST">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
         </form>
       </div>
@@ -56,6 +56,7 @@
 
       <div class="starter-template">
         <h1>Welcome <%=user.firstName%> <%=user.lastName%></h1>
+        <h3>Last Logged: <%=new Date(user.lastLogged).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: 'numeric' })%></h3>
         <h3>Email: <%=user.email%></h3>
         <h3>ID: <%=user.id%></h3>
       </div>
